@@ -102,17 +102,17 @@ int add_user(Group *group, const char *user_name) {
     // search the user list to find the previous user
     User *prev_user = find_prev_user(group, user_name);
 
-    // if the user list has only 1 user (prev_user is the 1st and only user)
-    // and the name matches user_name, return -1
-    if (prev_user != NULL && prev_user == group->users
-            && strcmp(prev_user->name, user_name) == 0) {
-        return -1;
-    }
-    // if the user list has multiple users, and the next user of this prev_user
-    // has the name that matches user_name, then return -1
-    else if (prev_user != NULL && prev_user->next != NULL
-             && strcmp((prev_user->next)->name, user_name) == 0) {
-        return -1;
+    // if the prev_user is not NULL, there are 2 cases to consider:
+    if (prev_user != NULL) {
+        // a. if the prev_user is the first user in the list, return -1
+        if (prev_user == group->users) {
+            return -1;
+        }
+        // b. if the user list has multiple users, and the next user of this
+        // prev_user has the name that matches user_name, then return -1
+        else if (strcmp((prev_user->next)->name, user_name) == 0) {
+            return -1;
+        }
     }
 
     // if none of them above, meaning user does not exist, then reserve memory
@@ -283,12 +283,14 @@ User *find_prev_user(Group *group, const char *user_name) {
     // if the user list is not empty, then loop through the list, compare the
     // user name and return:
     //    1. the previous user of this user_name user
-    //    2. or the tail user if user does not exist in the user list
+    //    2. or NULL if user does not exist in the user list
     while (current != NULL && strcmp(current->name, user_name) != 0) {
         previous = current;
         current = current->next;
     }
-    return previous;
+    // if the current pointer is NULL, then user does not exists, return NULL
+    // otherwise, return the previous pointer
+    return (current == NULL) ? NULL : previous;
 }
 
 /* Add the transaction represented by user_name and amount to the appropriate
@@ -302,9 +304,6 @@ int add_xct(Group *group, const char *user_name, double amount) {
     // if the user list is empty, return -1. or if the prev_user is the tail
     // user in the list and the name does not match, return -1 as well
     if (prev_user == NULL) {
-        return -1;
-    } else if (prev_user->next == NULL
-               && strcmp(prev_user->name, user_name) != 0) {
         return -1;
     }
 
@@ -413,7 +412,8 @@ void remove_xct(Group *group, const char *user_name) {
         free(removed_xct);
     }
 
-    // check the remaining transactions in this list
+    // check the remaining transactions in this list, if transactions exist
+    // remove all of them
     Xct *previous = current;
     while (current != NULL) {
         // if the name matches, update pointer & balance, then free up memory
