@@ -1,0 +1,33 @@
+# Pipes Solutions
+# 1.
+echo Sort players by first name
+cut -f 1 hockey_stats.txt | sort
+echo Sort players by last name
+cut -f 1 hockey_stats.txt | sort -k 2
+
+echo
+
+# 2.
+echo Number of TOR players are among the top 10 scorers: \
+`head -n 10 hockey_stats.txt | grep TOR | wc -l`
+echo Number of PIT players are among the top 10 scorers: \
+`head -n 10 hockey_stats.txt | grep PIT | wc -l`
+
+echo
+
+# 3.
+# extract line 10-20
+head -n 20 hockey_stats.txt | tail -n 10
+
+echo
+
+# 4.
+echo The position of the player with the largest number of games played: \
+`sort -k5r hockey_stats.txt | head -n1 | cut -f 3`
+# sort in decending order, get the first line, extract the position
+
+echo
+
+# 5.
+echo Total number of teams that are listed in the file: \
+`cut -f 2 hockey_stats.txt | sort | uniq | wc -l`

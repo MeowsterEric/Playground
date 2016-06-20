@@ -1,0 +1,6 @@
+#!/bin/sh
+
+echo Hello world.
+echo 'Hello world.'
+echo "Hello world."
+# echo `Hello world.` - fail b/c back quote tells the shell to execute it

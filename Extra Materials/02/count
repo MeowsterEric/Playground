@@ -1,0 +1,9 @@
+#!/bin/sh
+
+for i in $@
+do
+    # echo -n ==> do not add new line to the end
+    # wc -m ==> count characters
+    echo -n $i | wc -m
+done
+

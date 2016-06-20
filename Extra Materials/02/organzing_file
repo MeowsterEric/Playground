@@ -1,0 +1,14 @@
+#!/bin/sh
+
+rm -rf actual/
+
+mkdir actual
+
+for f in `ls tests`
+do
+    new_dir="actual/actual_$f/"
+    mkdir $new_dir
+    cp tests/$f $new_dir/
+done
+
+ls actual/*/*

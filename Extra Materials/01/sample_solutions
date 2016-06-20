@@ -1,0 +1,52 @@
+#!/bin/sh
+
+# Solutions to Warm-up exercises:
+
+# 1.
+head -n 3 hockey_stats.txt
+
+# 2.
+wc -c hockey_stats.txt
+
+# 3.
+sort -k5nr hockey_stats.txt
+
+# 4.
+grep TOR hockey_stats.txt
+
+# 5.
+cut -f 1 hockey_stats.txt > players.txt
+
+
+
+
+
+# Solutions to Exercises with pipes:
+
+# 1.
+sort hockey_stats.txt | cut -f 1
+
+# 2.
+head -n 10 hockey_stats.txt | grep TOR | wc -l
+
+# 3.
+head -n 20 hockey_stats.txt | tail -n 10
+
+# 4.
+sort -k5nr hockey_stats.txt | head -n 1 | cut -f 3
+
+# 5.
+cut -f 2 hockey_stats.txt | sort | uniq | wc -l
+
+# 6.
+ps aux |grep sshd | grep -v grep |wc -l
+
+# 7.
+ps aux |grep sshd | cut -f 1 -d " " | sort | uniq |wc -l
+
+# Notes:
+# -- cut and sort use different delimiters
+#        (by default tab for cut, while sort uses either space or tab).
+# -- for some pipes the commands could be arranged in a different order
+#        (e.g. for exercise 1)
+#        this would also work: cut -f 1 hockey_stats.txt | sort
