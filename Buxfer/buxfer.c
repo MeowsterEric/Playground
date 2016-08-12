@@ -22,87 +22,92 @@ int process_args(int cmd_argc, char **cmd_argv, Group **group_list_addr) {
 
     if (cmd_argc <= 0) {
         return 0;
-    } else if (strcmp(cmd_argv[0], "quit") == 0 && cmd_argc == 1) {
+    }
+    else if (strcmp(cmd_argv[0], "quit") == 0 && cmd_argc == 1) {
         return -1;
+    }
 
-    } else if (strcmp(cmd_argv[0], "add_group") == 0 && cmd_argc == 2) {
-        if (add_group(group_list_addr, cmd_argv[1]) == -1) {
+    // Group
+    else if (strcmp(cmd_argv[0], "add_group") == 0 && cmd_argc == 2) {
+        if (add_group(group_list_addr, cmd_argv[1]) == -1)
             error("Group already exists");
-        }
-
-    } else if (strcmp(cmd_argv[0], "list_groups") == 0 && cmd_argc == 1) {
+    }
+    else if (strcmp(cmd_argv[0], "list_groups") == 0 && cmd_argc == 1) {
         list_groups(group_list);
+    }
 
-    } else if (strcmp(cmd_argv[0], "add_user") == 0 && cmd_argc == 3) {
+    // User
+    else if (strcmp(cmd_argv[0], "add_user") == 0 && cmd_argc == 3) {
         if ((g = find_group(group_list, cmd_argv[1])) == NULL) {
             error("Group does not exist");
-        } else {
-            if (add_user(g, cmd_argv[2]) == -1) {
+        }
+        else {
+            if (add_user(g, cmd_argv[2]) == -1)
                 error("User already exists");
-            }
         }
-
-    } else if (strcmp(cmd_argv[0], "remove_user") == 0 && cmd_argc == 3) {
+    }
+    else if (strcmp(cmd_argv[0], "remove_user") == 0 && cmd_argc == 3) {
         if ((g = find_group(group_list, cmd_argv[1])) == NULL) {
             error("Group does not exist");
-        } else {
-            if (remove_user(g, cmd_argv[2]) == -1) {
+        }
+        else {
+            if (remove_user(g, cmd_argv[2]) == -1)
                 error("User does not exist");
-            }
         }
-
-    } else if (strcmp(cmd_argv[0], "list_users") == 0 && cmd_argc == 2) {
+    }
+    else if (strcmp(cmd_argv[0], "list_users") == 0 && cmd_argc == 2) {
+        ((g = find_group(group_list, cmd_argv[1])) == NULL) ? error("Group does not exist") : list_users(g);
+    }
+    else if (strcmp(cmd_argv[0], "user_balance") == 0 && cmd_argc == 3) {
         if ((g = find_group(group_list, cmd_argv[1])) == NULL) {
             error("Group does not exist");
-        } else {
-            list_users(g);
         }
-
-    } else if (strcmp(cmd_argv[0], "user_balance") == 0 && cmd_argc == 3) {
-        if ((g = find_group(group_list, cmd_argv[1])) == NULL) {
-            error("Group does not exist");
-        } else {
-            if (user_balance(g, cmd_argv[2]) == -1) {
+        else {
+            if (user_balance(g, cmd_argv[2]) == -1)
                 error("User does not exist");
-            }
         }
+    }
 
-    } else if (strcmp(cmd_argv[0], "under_paid") == 0 && cmd_argc == 2) {
+    // Transactions
+    else if (strcmp(cmd_argv[0], "under_paid") == 0 && cmd_argc == 2) {
         if ((g = find_group(group_list, cmd_argv[1])) == NULL) {
             error("Group does not exist");
-        } else {
-            if (under_paid(g) == -1) {
+        }
+        else {
+            if (under_paid(g) == -1)
                 error("User list empty");
-            }
         }
 
-    } else if (strcmp(cmd_argv[0], "add_xct") == 0 && cmd_argc == 4) {
+    }
+    else if (strcmp(cmd_argv[0], "add_xct") == 0 && cmd_argc == 4) {
         if ((g = find_group(group_list, cmd_argv[1])) == NULL) {
             error("Group does not exist");
-        } else {
+        }
+        else {
             char *end;
             double amount = strtod(cmd_argv[3], &end);
             if (end == cmd_argv[3]) {
                 error("Incorrect number format");
-            } else {
-                if (add_xct(g, cmd_argv[2], amount) == -1) {
+            }
+            else {
+                if (add_xct(g, cmd_argv[2], amount) == -1)
                     error("User does not exist");
-                }
             }
         }
-    } else if (strcmp(cmd_argv[0], "recent_xct") == 0 && cmd_argc == 3) {
+    }
+    else if (strcmp(cmd_argv[0], "recent_xct") == 0 && cmd_argc == 3) {
         if ((g = find_group(group_list, cmd_argv[1])) == NULL) {
             error("Group does not exist");
-        } else {
+        }
+        else {
             char *end;
             long num = strtol(cmd_argv[2], &end, 10);
-            if (end == cmd_argv[2]) {
-                error("Incorrect number format");
-            } else {
-                recent_xct(g, num);
-            }
+            (end == cmd_argv[2]) ? error("Incorrect number format") : recent_xct(g, num);
         }
-    } else {
+    }
+
+    // Others
+    else {
         error("Incorrect syntax");
     }
     return 0;
