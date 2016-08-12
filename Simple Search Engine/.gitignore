@@ -1,0 +1,9 @@
+# Object files
+*.o
+
+indexer
+query
+queryone
+printindex
+test_get_word
+
