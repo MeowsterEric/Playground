@@ -25,14 +25,23 @@ The Transaction lists are sorted by the time when a transaction was added, with 
 A Buxfer application supports the following user commands.
 
 * **add_group group_name:** Register a new group with name group_name.
+
 * **list_groups:** List the names of all groups that are currently registered.
+
 * **add_user group_name user_name:** Register a new user with name user_name as a member of group group_name.
+
 * **list_users group_name:** List the names of all users of group group_name together with their current balances (i.e. how much each has paid so far), sorted by their balances (lowest payer first).
+
 * **user_balance group_name user_name:** Return the balance of user user_name in group group_name.
+
 * **remove_user group_name user_name:** Remove user user_name from group group_name.
+
 * **under_paid group_name:** Output the name of the user in group group_name who has paid the least.
+
 * **add_xct group_name user_name amount:** Add a new transaction for group group_name. The transaction is paid by user_name and the amount is amount.
+
 * **recent_xct group_name num_xct:** List the num_xct most recent transactions for group group_name.
+
 * **quit:** Shut down buxfer.
 
 The buxfer executable can be started from the commandline with either zero or one argument as follows:
