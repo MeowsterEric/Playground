@@ -11,7 +11,3 @@ The index of a file name corresponds to the index of the frequency array in a li
 ![structure](./structure.jpg)
 
 * In the diagram above, four words have been extracted from two files. The two files are called "Menu1" and "Menu2". The linked list shows that the word "spinach" appears 2 times in the file Menu1 and 6 times in the file Menu2. Similarly, the word "potato" appears 11 times in the file Menu1 and 3 times in Menu2. The words in the linked list are in alphabetical order.
-
-==================================================
-
-[Return to Home Repository](../)
