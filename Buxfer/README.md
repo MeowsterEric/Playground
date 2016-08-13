@@ -51,3 +51,7 @@ The buxfer executable can be started from the commandline with either zero or on
 If buxfer is run without any arguments, it starts in interactive mode. It will display a prompt and wait for the above commands at the command line.
 
 If run with one argument, it expects this argument to be the name of a file that contains one buxfer command per line (the commands are those from the list above) and will execute those commands from the file.
+
+==================================================
+
+[Return to Home Repository](../)
