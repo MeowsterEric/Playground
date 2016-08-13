@@ -1,6 +1,0 @@
-#!/bin/sh
-
-for i in $PATH $# ~ `pwd`
-do
-    echo $i
-done
