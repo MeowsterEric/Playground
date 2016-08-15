@@ -38,3 +38,6 @@
 *.jar
 *.war
 *.ear
+
+# Python
+__pycache__/
