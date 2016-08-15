@@ -30,3 +30,11 @@
 
 # Debug files
 *.dSYM/
+
+# Java class file
+*.class
+
+# Package Files #
+*.jar
+*.war
+*.ear
