@@ -3,6 +3,7 @@
 ## Introduction
 Buxfer is a service that lets groups of people track shared expenses. For example, colleagues might want to keep track of shared lunch bills. For each expense, Buxfer records the person who paid the expense and the expense cost. It allows group members to examine the amount that individuals have paid, look at the history of all transactions, or determine the group member that is currently owing the most.
 
+
 ## Data Structure
 
 A Buxfer application can manage multiple groups, and for each group must keep track of the group's members and the group's transactions (expenses paid by users). This means that we need three different data structures: the groups, the users (in a specific group), and transactions (for a specific user). It is sufficient to use linked lists to store groups, users and transactions.
@@ -22,6 +23,7 @@ The Transaction lists are sorted by the time when a transaction was added, with 
 
 
 ## Operation Supported by Buxfer
+
 A Buxfer application supports the following user commands.
 
 * **add_group group_name:** Register a new group with name group_name.
@@ -44,9 +46,12 @@ A Buxfer application supports the following user commands.
 
 * **quit:** Shut down buxfer.
 
+
+## Usage
+
 The buxfer executable can be started from the commandline with either zero or one argument as follows:
 
-    ./buxfer [filename]
+    buxfer [FILENAME]
 
 If buxfer is run without any arguments, it starts in interactive mode. It will display a prompt and wait for the above commands at the command line.
 

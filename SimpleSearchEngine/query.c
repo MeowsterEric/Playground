@@ -22,7 +22,7 @@ int main(int argc, char **argv) {
             startdir = optarg;
             break;
         default:
-            fprintf(stderr, "Usage: queryone [-d DIRECTORY_NAME]\n");
+            fprintf(stderr, "Usage: query [-d DIRECTORY_NAME]\n");
             exit(1);
         }
     }
