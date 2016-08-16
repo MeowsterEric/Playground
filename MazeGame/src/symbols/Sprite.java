@@ -3,8 +3,8 @@ package symbols;
 public abstract class Sprite {
 
 	private final char symbol;
-	private final int row;
-	private final int column;
+	protected int row;
+	protected int column;
 
 	public Sprite(char symbol, int row, int column) {
 		this.symbol = symbol;
