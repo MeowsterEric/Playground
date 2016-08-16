@@ -1,4 +1,4 @@
-package mazeGame;
+package symbols;
 
 public abstract class Sprite {
 

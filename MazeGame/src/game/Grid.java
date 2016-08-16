@@ -1,4 +1,4 @@
-package mazeGame;
+package game;
 
 public interface Grid<T> {
 

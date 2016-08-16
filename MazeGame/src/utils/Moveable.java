@@ -1,4 +1,4 @@
-package mazeGame;
+package utils;
 
 public interface Moveable {
 

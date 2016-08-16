@@ -1,4 +1,4 @@
-package mazeGame;
+package utils;
 
 /** Constants used by the MazeGame. */
 public class MazeConstants {
