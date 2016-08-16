@@ -98,5 +98,4 @@ To help you test your code, we have provided two testers, which you will also fi
     test_full.c 
 	```
 
-The tester loads your module and tests some basic functionality. It is by no means a comprehensive tool to ensure your code works for every corner case. To ensure that your code works correctly in all possible scenarios, you should add more test cases by modifying the testers (done). The tester will not catch synchronization bugs, except for blatant deadlocks. It is your responsibility to ensure that your code is not likely to run into synchonization problems.<br>
-Finally, when testing, you will likely see the tester crash on various tests, due to bugs in your module. During your debugging, please feel free to go in each tester, and comment out some of the system calls being tested, if you wish to debug each test case in isolation.
+The tester loads your module and tests some basic functionality. It is by no means a comprehensive tool to ensure your code works for every corner case. To ensure that your code works correctly in all possible scenarios, you should add more test cases by modifying the testers (done). The tester will not catch synchronization bugs, except for blatant deadlocks. It is your responsibility to ensure that your code is not likely to run into synchonization problems.

@@ -1,0 +1,12 @@
+XXXXXXXXXXXXXXXXXXXXXXXX
+X        B     X  B  X X
+X X   X      X MX  XXX X
+XXX XXXXXXXX X  X      X
+X   X    X   X  XXXXXX X
+X1  X  XXX   X   2   X X
+X   X      M   XXXX  X X
+X XXX XXXXXX      X    X
+X X   X    X  X   XXXXXX
+X XXXXX  X XXXXX       X
+X B      X   B   X   X X
+XXXXXXXXXXXXXXXXXXXXXXXX
