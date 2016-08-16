@@ -4,8 +4,12 @@ This repository contains various assignments/projects from the University of Tor
 ## List of Assignments/Projects
 [Buxfer [C]](./Buxfer) - A simple money management system.
 
-[Maze Game [Java]](./Maze\ Game) - Monkey eats Banana game!
+[Maze Game [Java]](./MazeGame) - Monkey eats Banana game!
 
-[Simple Search Engine [C]](./Simple\ Search\ Engine) - A simple search engine simulator.
+[Self-learning Script [Shell Script]](./Self-learningScript) - A script that ask user questions and learn from user's input.
+
+[Simple Search Engine [C]](./SimpleSearchEngine) - A simple search engine simulator.
 
 [System Calls Interceptor and Process Monitor [C]](./Interceptor) - Intercepting Linux system calls and monitoring system processes.
+
+[Tower of Anne Hoy [Python]](./TOAH) - An improved version of Tower of Hanoi.
