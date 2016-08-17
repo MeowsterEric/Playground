@@ -42,7 +42,6 @@ public class ArrayGrid<T> implements Grid<Sprite> {
 	@Override
 	public String toString() {
 		String strRep = "";
-
 		for (int i = 0; i < numRows; i++) {
 			for (int j = 0; j < numCols; j++)
 				strRep += cell[i][j];
