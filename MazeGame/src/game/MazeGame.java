@@ -4,8 +4,6 @@ import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.List;
-import java.util.NoSuchElementException;
 import java.util.Random;
 
 import symbols.Banana;
@@ -32,71 +30,74 @@ public class MazeGame {
 
 	/** A random number generator to move the MobileBananas. */
 	private Random random;
-	private Grid<Sprite> maze;
-	private List<Banana> bananas;
+	private ArrayGrid<Sprite> maze;
+	private ArrayList<Banana> bananas;
 	private Monkey player1;
 	private Monkey player2;
 
 	public MazeGame(String layoutFileName) throws IOException {
 		this.random = new Random();
 		this.bananas = new ArrayList<Banana>();
-		setupMaze(layoutFileName);
+		this.maze = buildMaze(layoutFileName);
 	}
 
-	private void setupMaze(String layoutFileName) throws IOException {
+	private ArrayGrid<Sprite> buildMaze(String layoutFileName) throws IOException {
 		// read the maze layout file
 		BufferedReader br = new BufferedReader(new FileReader(layoutFileName));
-		br.mark(0); // mark the starting point of the file
+		ArrayList<String> layoutContent = new ArrayList<String>();
+		String line;
 
-		String line = br.readLine();
-		int numCols = line.length(); // get the number of columns
-		int numRows = 0;
-		while (line != null && line != "") { // find the number of rows
-			numRows++;
-			line = br.readLine();
+		while ((line = br.readLine()) != null && line != "") {
+			layoutContent.add(line);
 		}
-		br.reset(); // return to starting point
+		br.close();
 
-		this.maze = new ArrayGrid<Sprite>(numRows, numCols);
-		for (int i = 0; i < numRows; i++) {
-			line = br.readLine();
-			for (int j = 0; j < line.length(); j++) {
-				switch (line.charAt(j)) {
+		return buildMazeLayout(layoutContent.size(), layoutContent.get(0).length(), layoutContent);
+	}
+
+	private ArrayGrid<Sprite> buildMazeLayout(int numRows, int numCols, ArrayList<String> layoutContent) {
+		ArrayGrid<Sprite> mazeMap = new ArrayGrid<Sprite>(numRows, numCols);
+
+		for (int i = 0; i < layoutContent.size(); i++) {
+			for (int j = 0; j < layoutContent.get(i).length(); j++) {
+				switch (layoutContent.get(i).charAt(j)) {
 				case MazeSymbols.P1:
-					maze.setCell(i, j, new Monkey(MazeSymbols.P1, i, j, 0, 0));
+					mazeMap.setCell(i, j, new Monkey(MazeSymbols.P1, i, j, 0, 0));
 					break;
 				case MazeSymbols.P2:
-					maze.setCell(i, j, new Monkey(MazeSymbols.P2, i, j, 0, 0));
+					mazeMap.setCell(i, j, new Monkey(MazeSymbols.P2, i, j, 0, 0));
 					break;
 				case MazeSymbols.VACANT:
-					maze.setCell(i, j, new UnvisitedHallway(MazeSymbols.VACANT, i, j));
+					mazeMap.setCell(i, j, new UnvisitedHallway(MazeSymbols.VACANT, i, j));
 					break;
 				case MazeSymbols.VISITED:
-					maze.setCell(i, j, new VisitedHallway(MazeSymbols.VISITED, i, j));
+					mazeMap.setCell(i, j, new VisitedHallway(MazeSymbols.VISITED, i, j));
 					break;
 				case MazeSymbols.WALL:
-					maze.setCell(i, j, new Wall(MazeSymbols.WALL, i, j));
+					mazeMap.setCell(i, j, new Wall(MazeSymbols.WALL, i, j));
 					break;
 				case MazeSymbols.BANANA:
 					Banana b = new Banana(MazeSymbols.BANANA, i, j, MazeConstants.BANANA_SCORE);
-					maze.setCell(i, j, b);
+					mazeMap.setCell(i, j, b);
 					this.bananas.add(b);
 					break;
 				case MazeSymbols.MOBILE_BANANA:
 					MobileBanana mb = new MobileBanana(MazeSymbols.MOBILE_BANANA, i, j, MazeConstants.MOBILE_BANANA_SCORE);
-					maze.setCell(i, j, mb);
+					mazeMap.setCell(i, j, mb);
 					this.bananas.add(mb);
 					break;
+				// case: //more symbols goes here in the future.
+				// break;
 				default:
-					throw new NoSuchElementException("No such symbol.");
+					return null;
 				}
 			}
 		}
 
-		br.close();
+		return mazeMap;
 	}
 
-	public Grid<Sprite> getMaze() {
+	public ArrayGrid<Sprite> getMaze() {
 		return this.maze;
 	}
 

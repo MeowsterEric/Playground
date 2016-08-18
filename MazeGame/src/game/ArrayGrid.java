@@ -2,7 +2,7 @@ package game;
 
 import symbols.Sprite;
 
-public class ArrayGrid<T> implements Grid<Sprite> {
+public class ArrayGrid<T extends Sprite> implements Grid<Sprite> {
 
 	private final int numRows;
 	private final int numCols;
