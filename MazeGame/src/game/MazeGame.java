@@ -5,6 +5,7 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.NoSuchElementException;
 import java.util.Random;
 
 import symbols.Banana;
@@ -15,16 +16,15 @@ import symbols.UnvisitedHallway;
 import symbols.VisitedHallway;
 import symbols.Wall;
 import utils.MazeConstants;
+import utils.MazeConstants.MazeSymbols;
 
 /**
- * A class that represents the basic functionality of the maze game. This class
- * is responsible for performing the following operations:
+ * A class that represents the basic functionality of the maze game. This class is responsible for performing the
+ * following operations:
  * 
- * 1. At creation, it initializes the instance variables used to store the
- * current state of the game.
+ * 1. At creation, it initializes the instance variables used to store the current state of the game.
  * 
- * 2. When a move is specified, it checks if it is a legal move and makes the
- * move if it is legal.
+ * 2. When a move is specified, it checks if it is a legal move and makes the move if it is legal.
  * 
  * 3. It reports information about the current state of the game when asked.
  */
@@ -32,7 +32,6 @@ public class MazeGame {
 
 	/** A random number generator to move the MobileBananas. */
 	private Random random;
-
 	private Grid<Sprite> maze;
 	private List<Banana> bananas;
 	private Monkey player1;
@@ -40,14 +39,14 @@ public class MazeGame {
 
 	public MazeGame(String layoutFileName) throws IOException {
 		this.random = new Random();
-		int[] dimension = getDimensions(layoutFileName);
-		this.maze = new ArrayGrid<Sprite>(dimension[0], dimension[1]);
 		this.bananas = new ArrayList<Banana>();
+		setupMaze(layoutFileName);
 	}
 
-	private int[] getDimensions(String layoutFileName) throws IOException {
+	private void setupMaze(String layoutFileName) throws IOException {
 		// read the maze layout file
 		BufferedReader br = new BufferedReader(new FileReader(layoutFileName));
+		br.mark(0); // mark the starting point of the file
 
 		String line = br.readLine();
 		int numCols = line.length(); // get the number of columns
@@ -56,13 +55,45 @@ public class MazeGame {
 			numRows++;
 			line = br.readLine();
 		}
+		br.reset(); // return to starting point
+
+		this.maze = new ArrayGrid<Sprite>(numRows, numCols);
+		for (int i = 0; i < numRows; i++) {
+			line = br.readLine();
+			for (int j = 0; j < line.length(); j++) {
+				switch (line.charAt(j)) {
+				case MazeSymbols.P1:
+					maze.setCell(i, j, new Monkey(MazeSymbols.P1, i, j, 0, 0));
+					break;
+				case MazeSymbols.P2:
+					maze.setCell(i, j, new Monkey(MazeSymbols.P2, i, j, 0, 0));
+					break;
+				case MazeSymbols.VACANT:
+					maze.setCell(i, j, new UnvisitedHallway(MazeSymbols.VACANT, i, j));
+					break;
+				case MazeSymbols.VISITED:
+					maze.setCell(i, j, new VisitedHallway(MazeSymbols.VISITED, i, j));
+					break;
+				case MazeSymbols.WALL:
+					maze.setCell(i, j, new Wall(MazeSymbols.WALL, i, j));
+					break;
+				case MazeSymbols.BANANA:
+					Banana b = new Banana(MazeSymbols.BANANA, i, j, MazeConstants.BANANA_SCORE);
+					maze.setCell(i, j, b);
+					this.bananas.add(b);
+					break;
+				case MazeSymbols.MOBILE_BANANA:
+					MobileBanana mb = new MobileBanana(MazeSymbols.MOBILE_BANANA, i, j, MazeConstants.MOBILE_BANANA_SCORE);
+					maze.setCell(i, j, mb);
+					this.bananas.add(mb);
+					break;
+				default:
+					throw new NoSuchElementException("No such symbol.");
+				}
+			}
+		}
 
 		br.close();
-		return new int[] { numRows, numCols };
-	}
-
-	private void setupMaze() {
-
 	}
 
 	public Grid<Sprite> getMaze() {
