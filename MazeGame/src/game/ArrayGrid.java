@@ -30,7 +30,7 @@ public class ArrayGrid<T extends Sprite> implements Grid<Sprite> {
 	}
 
 	@Override
-	public int getNumCols() {
+	public int getNumColumns() {
 		return this.numCols;
 	}
 

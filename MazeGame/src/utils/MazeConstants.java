@@ -3,7 +3,7 @@ package utils;
 /** Constants used by the MazeGame. */
 public class MazeConstants {
 
-	public static final String FILENAME = "./MazeGame/src/maps/maze1.txt";
+	public static final String FILENAME = "/Users/Eric/Github Workspace/Playground/MazeGame/src/maps/maze1.txt";
 
 	public static final String UI_TYPE = "gui"; // must be "text" or "gui"
 
@@ -32,7 +32,7 @@ public class MazeConstants {
 
 	}
 
-	public static final class UserCommands {
+	public static final class PlayerCommands {
 
 		/** The symbol for Player 1 moving left. */
 		public static final char P1_LEFT = 'a';

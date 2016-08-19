@@ -8,7 +8,7 @@ public interface Grid<T> {
 
 	public int getNumRows();
 
-	public int getNumCols();
+	public int getNumColumns();
 
 	public boolean equals(Grid<T> other);
 
