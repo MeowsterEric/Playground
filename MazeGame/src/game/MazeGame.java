@@ -52,14 +52,14 @@ public class MazeGame {
 		}
 		br.close();
 
-		return buildMazeLayout(layoutContent.size(), layoutContent.get(0).length(), layoutContent);
+		return buildMazeLayout(layoutContent);
 	}
 
-	private ArrayGrid<Sprite> buildMazeLayout(int numRows, int numCols, ArrayList<String> layoutContent) {
-		ArrayGrid<Sprite> mazeMap = new ArrayGrid<Sprite>(numRows, numCols);
+	private ArrayGrid<Sprite> buildMazeLayout(ArrayList<String> layoutContent) {
+		ArrayGrid<Sprite> mazeMap = new ArrayGrid<Sprite>(layoutContent.size(), layoutContent.get(0).length());
 
-		for (int i = 0; i < layoutContent.size(); i++) {
-			for (int j = 0; j < layoutContent.get(i).length(); j++) {
+		for (int i = 0; i < mazeMap.getNumRows(); i++) {
+			for (int j = 0; j < mazeMap.getNumColumns(); j++) {
 				switch (layoutContent.get(i).charAt(j)) {
 				case MazeSymbols.P1:
 					mazeMap.setCell(i, j, new Monkey(MazeSymbols.P1, i, j, 0, 0));
@@ -113,8 +113,8 @@ public class MazeGame {
 		return this.maze.getNumRows();
 	}
 
-	public int getNumCols() {
-		return this.maze.getNumCols();
+	public int getNumColumns() {
+		return this.maze.getNumColumns();
 	}
 
 	public Sprite get(int i, int j) {
