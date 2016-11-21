@@ -58,6 +58,10 @@ public class MazeConstants {
 		/** The symbol for Player 2 moving up. */
 		public static final char P2_UP = 'i';
 
+		/** The command sets for Player1 and Player2 */
+		public static final char[] P1_CMDSET = { P1_UP, P1_DOWN, P1_LEFT, P1_RIGHT };
+		public static final char[] P2_CMDSET = { P2_UP, P2_DOWN, P2_LEFT, P2_RIGHT };
+
 	}
 
 	/** The score for a banana. */

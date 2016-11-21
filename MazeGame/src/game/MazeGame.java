@@ -123,68 +123,83 @@ public class MazeGame {
 	}
 
 	public void move(char nextMove) {
+		Monkey player;
+		if ((player = isNextMoveReturnPlayer(nextMove)) != null && isNextMoveValid(player))
+			// player.move(player.getNextRow(), player.getNextCol());
 
-		if (isNextMoveValid(nextMove) && isNextMoveVacant(nextMove)) {
-			switch (nextMove) {
-			case PlayerCommands.P1_UP:
-			case PlayerCommands.P1_DOWN:
-			case PlayerCommands.P1_LEFT:
-			case PlayerCommands.P1_RIGHT:
-				movePlayer(this.player1, nextMove);
-				break;
-			case PlayerCommands.P2_UP:
-			case PlayerCommands.P2_DOWN:
-			case PlayerCommands.P2_LEFT:
-			case PlayerCommands.P2_RIGHT:
-				movePlayer(this.player2, nextMove);
-				break;
-			default:
-				return;
-			}
-		}
-
+			// player.move();
+			moveAndSetPlayerOnGrid(player);
 	}
 
-	private boolean isNextMoveValid(char nextMove) {
-		// TODO Auto-generated method stub
-		return false;
-	}
-
-	private boolean isNextMoveVacant(char nextMove) {
-
-		return false;
-	}
-
-	private void movePlayer(Monkey player, char nextMove) {
-		int row = player.getRow();
-		int col = player.getColumn();
-
+	private Monkey isNextMoveReturnPlayer(char nextMove) {
 		switch (nextMove) {
 		case PlayerCommands.P1_UP:
-		case PlayerCommands.P2_UP:
-			row += MazeConstants.UP;
-			break;
+			this.player1.setNextMove(this.player1.getRow() + MazeConstants.UP, this.player1.getColumn());
 		case PlayerCommands.P1_DOWN:
-		case PlayerCommands.P2_DOWN:
-			row += MazeConstants.DOWN;
-			break;
+			this.player1.setNextMove(this.player1.getRow() + MazeConstants.DOWN, this.player1.getColumn());
 		case PlayerCommands.P1_LEFT:
-		case PlayerCommands.P2_LEFT:
-			col += MazeConstants.LEFT;
-			break;
+			this.player1.setNextMove(this.player1.getRow(), this.player1.getColumn() + MazeConstants.LEFT);
 		case PlayerCommands.P1_RIGHT:
+			this.player1.setNextMove(this.player1.getRow(), this.player1.getColumn() + MazeConstants.RIGHT);
+
+			System.out.println(player1.getNextRow());
+			System.out.println(player1.getNextCol());
+			return this.player1;
+
+		case PlayerCommands.P2_UP:
+			this.player2.setNextMove(this.player2.getRow() + MazeConstants.UP, this.player2.getColumn());
+		case PlayerCommands.P2_DOWN:
+			this.player2.setNextMove(this.player2.getRow() + MazeConstants.DOWN, this.player2.getColumn());
+		case PlayerCommands.P2_LEFT:
+			this.player2.setNextMove(this.player2.getRow(), this.player2.getColumn() + MazeConstants.LEFT);
 		case PlayerCommands.P2_RIGHT:
-			col += MazeConstants.RIGHT;
-			break;
+			this.player2.setNextMove(this.player2.getRow(), this.player2.getColumn() + MazeConstants.RIGHT);
+			return this.player2;
 		default:
-			return; // no move
+			return null;
 		}
-		moveAndSetPlayerOnGrid(player, row, col);
+
 	}
 
-	private void moveAndSetPlayerOnGrid(Monkey player, int nextRow, int nextColumn) {
+	private boolean isNextMoveValid(Monkey player) {
+		int nextRow = player.getNextRow();
+		int nextCol = player.getNextCol();
+
+		Sprite cell = get(nextRow, nextCol);
+		return (cell instanceof UnvisitedHallway || cell instanceof Banana);
+	}
+
+	// private void movePlayer(Monkey player, char nextMove) {
+	// int row = player.getRow();
+	// int col = player.getColumn();
+	//
+	// switch (nextMove) {
+	// case PlayerCommands.P1_UP:
+	// case PlayerCommands.P2_UP:
+	// row += MazeConstants.UP;
+	// break;
+	// case PlayerCommands.P1_DOWN:
+	// case PlayerCommands.P2_DOWN:
+	// row += MazeConstants.DOWN;
+	// break;
+	// case PlayerCommands.P1_LEFT:
+	// case PlayerCommands.P2_LEFT:
+	// col += MazeConstants.LEFT;
+	// break;
+	// case PlayerCommands.P1_RIGHT:
+	// case PlayerCommands.P2_RIGHT:
+	// col += MazeConstants.RIGHT;
+	// break;
+	// default:
+	// return; // no move
+	// }
+	// moveAndSetPlayerOnGrid(player, row, col);
+	// }
+
+	private void moveAndSetPlayerOnGrid(Monkey player) {
 		Sprite banana;
 		int row, col;
+		int nextRow = player.getNextRow(), nextColumn = player.getColumn();
 
 		if ((banana = get(nextRow, nextColumn)) instanceof Banana) {
 			player.eatBanana(((Banana) banana).getValue());
@@ -197,7 +212,8 @@ public class MazeGame {
 	}
 
 	public int hasWon() {
-		// TODO
+		int won = 0;
+
 		return 0;
 	}
 
