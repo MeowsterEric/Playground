@@ -1,6 +1,7 @@
-package d01tut1;
+package oodesign;
 
-class ContractEmployee extends Employee {	
+class ContractEmployee extends Employee {
+
 	public ContractEmployee(double salary) {
 		super(salary);
 	}
@@ -8,4 +9,5 @@ class ContractEmployee extends Employee {
 	public double getMonthlyPayExpense() {
 		return getMonthlySalary();
 	}
+
 }

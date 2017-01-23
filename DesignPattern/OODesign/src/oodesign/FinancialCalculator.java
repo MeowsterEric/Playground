@@ -1,9 +1,10 @@
-package d01tut1;
+package oodesign;
 
 import java.util.ArrayList;
 import java.util.List;
 
 class FinancialCalculator {
+
 	List<Employee> employees;
 
 	public FinancialCalculator() {
@@ -20,7 +21,8 @@ class FinancialCalculator {
 		for (Employee employee : employees) {
 			pay += employee.getMonthlyPayExpense();
 		}
-		
+
 		return pay;
 	}
+
 }

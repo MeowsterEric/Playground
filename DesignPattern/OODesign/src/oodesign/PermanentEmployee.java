@@ -1,6 +1,7 @@
-package d01tut1;
+package oodesign;
 
 class PermanentEmployee extends Employee {
+
 	private double vacationRate;
 
 	public PermanentEmployee(double salary, double vacationRate) {
@@ -11,8 +12,9 @@ class PermanentEmployee extends Employee {
 	public double vacationPay() {
 		return getSalary() * vacationRate / 12;
 	}
-	
+
 	public double getMonthlyPayExpense() {
 		return getMonthlySalary() + vacationPay();
 	}
+
 }
