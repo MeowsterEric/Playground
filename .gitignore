@@ -33,6 +33,8 @@
 
 # Java class file
 *.class
+*.classpath
+*.project
 
 # Package Files #
 *.jar
