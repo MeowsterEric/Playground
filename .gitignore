@@ -41,5 +41,6 @@
 *.war
 *.ear
 
-# Python
-__pycache__/
+# Python and PyCharm
+*/__pycache__/
+*/.idea/
